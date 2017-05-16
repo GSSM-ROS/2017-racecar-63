@@ -1,0 +1,14 @@
+    def __init__(self):
+        rospy.init_node("follower", anonymous=False)
+        rospy.Subscriber("/scan",Image,callback=self.contour_callback)
+        self.xy_pub = rospy.Publisher("/contour_xy,Image,queue_size = 1)
+        self.image_pub = rospy.Publish("/contour_image, message, queue_size = 1)  #for running in realtime, message undetermined currently
+        rospy.on_shutdown(self.die)
+
+        self.upper_hsv = (10,200,200)   #max values to find blob - should be 3 - h, s, v
+        self.lower_hsf = (0,100,100)   #min values to find blob
+        rospy.spin()
+
+    def die(self):
+        print("Follower program stopped")
+

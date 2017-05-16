@@ -1,0 +1,11 @@
+<launch>
+    <!-- Imports -->
+    <include file="$(find racecar)/launch/teleop.launch"/>
+    <include file="$(find zed_wrapper)/launch/zed.launch"/>  <!--finds the zed-ros-wrapper zed launch file-->
+
+    <!-- All of the custom classes used to drive the robot-->
+    <node name="Contours" pkg="image_echo" args="" type="detect.py" output="screen" />
+    <node name="pid_steer" pkg="image_echo" args="" type="pidcontrol.py" output="screen" />
+    <node name="pid_speed" pkg="image_echo" args="" type="pidspd.py" output="screen" />
+    <node name="driver" pkg="image_echo" args="" type="drive.py" output="screen" />
+</launch>

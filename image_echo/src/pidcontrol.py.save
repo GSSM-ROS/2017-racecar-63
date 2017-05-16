@@ -1,0 +1,40 @@
+#import cv2
+#import imutils
+#import numpy
+#import matplotlib.pyplot as plt
+#from cv_bridge import CvBridge, CvBridgeError
+#import threading
+import rospy
+#from image_echo.msg import Contour
+#from sensor_msgs.msg import Image
+from geometry_msgs.msg import Point
+from ackermann_msgs.msg import AckermannDriveStamped
+class PID():
+    def callback(self, msg):
+        self.send = AckermannDriveStamped()
+        u = self.pid((self.goal)-(msg.x))
+        self.send.drive.steering_angle = u
+        self.pub.publish(self.send)
+
+    def _init_(self, goal):
+        rospy.init_node("pidsteer", anonymous=False)
+        self.pub=rospy.Publisher("contour_steering", Float, queue_size=17)
+        rospy.subscriber("/contour_xy", Point, self.callback)
+        rospy.spin()
+
+    def pid(self, error):                                                    
+        '''
+        :param self: class referential variable
+        :param error: distance from desired goal
+        '''
+            self.errors.append(error)
+            if len(self.errors) > self.period:  
+                self.errors.pop(0)
+            p = self.Kp * error
+            if len(self.errors) > 1:
+                d = self.Kd * (error - self.errors[-2]) / self.dt  
+            else:
+                d = 0
+            i = self.Ki * sum(self.errors)/len(self.errors)*self.dt                         
+            u = p + i + d
+        
