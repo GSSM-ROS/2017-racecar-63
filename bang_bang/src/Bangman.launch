@@ -1,0 +1,7 @@
+<launch>
+
+	<node name="bangbang" pkg="hdamron_bang_bang" args="" type="bang_bang.py" output="screen"/>
+	<node name="safety" pkg="hdamron_bang_bang" args="" type="safety.py" output="screen" />
+
+</launch>
+

@@ -1,0 +1,13 @@
+<launch>        <!--begins a launch file-->
+
+	<include file="$(find racecar)/launch/teleop.launch"/>
+
+        <!--includes the teleop file for our convenience-->
+
+    <node name="potential_field" pkg="PotentialField" args="" type="Potential.py" output="screen" />
+
+        <!--initializes a node with the given parameters-->
+
+    <!-- balances the lines so that it looks all nice -->
+        
+</launch>       <!-- ends a launch file -->

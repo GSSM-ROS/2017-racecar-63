@@ -1,0 +1,3 @@
+<launch>
+  <node name="observer" pkg="observer" args="" type="laser_show.py" output="screen" />
+</launch>
